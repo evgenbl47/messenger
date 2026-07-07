@@ -1,0 +1,56 @@
+Добавить файлы в индексацию
+git add *
+
+Создать первый коммит
+git commit -m "Initial commit"
+
+Привязать удаленный репозиторий
+git remote add origin ССЫЛКА_НА_ВАШ_РЕПОЗИТОРИЙ
+
+Переименовать ветку
+git branch -M main
+
+Отправить файлы на сервер
+git push -u origin main
+
+
+
+Писать нужно строго в файл .gitignore в корневой папке вашего проекта (\java-messenger\.gitignore).
+"
+# --- Скомпилированные файлы Java ---
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# --- Каталог сборки (если появятся Maven/Gradle) ---
+target/
+build/
+out/
+
+# --- Настройки IntelliJ IDEA ---
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries
+.idea/shelf/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+.idea/dbnavigator.xml
+
+# Локальные файлы конфигурации (содержат пути на вашем ПК)
+*.iml
+*.iws
+*.ipr
+
+# --- Файлы операционной системы ---
+.DS_Store
+Thumbs.db
+.idea/
+"

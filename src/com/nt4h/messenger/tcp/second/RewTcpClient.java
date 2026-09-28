@@ -1,0 +1,36 @@
+package com.nt4h.messenger.tcp.second;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+
+public class RewTcpClient {
+    private static final String HOST = "127.0.0.1";
+
+    public static void main(String[] args) throws IOException {
+
+        try (Socket clientSocket = new Socket(HOST, RawTcpServer.PORT)) {
+            OutputStream outputStream = clientSocket.getOutputStream();
+
+//            byte[] bytes = {0,0,0,0}; //-128 ... 127 -> 256
+//            outputStream.write(bytes);
+//            used for explain how to read 4 bytes from RawClientServer and print it
+
+            String message = "Привет, мир!";
+            byte[] messageAsByteArray = message.getBytes(StandardCharsets.UTF_8);
+            int bytesInArray = messageAsByteArray.length;
+
+            byte[] encodedBytesInArray = {
+                    (byte) (bytesInArray >>> 24),
+                    (byte) (bytesInArray >>> 16),
+                    (byte) (bytesInArray >>> 8),
+                    (byte) (bytesInArray)
+            };
+
+            outputStream.write(encodedBytesInArray);
+            outputStream.write(messageAsByteArray);
+
+        }
+    }
+}

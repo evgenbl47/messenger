@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 public class RewTcpClient {
     private static final String HOST = "127.0.0.1";
-
+    //add repeating
     public static void main(String[] args) throws IOException {
 
         try (Socket clientSocket = new Socket(HOST, RawTcpServer.PORT)) {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public class RewTcpClient {
     private static final String HOST = "127.0.0.1";
@@ -16,8 +17,17 @@ public class RewTcpClient {
 //            byte[] bytes = {0,0,0,0}; //-128 ... 127 -> 256
 //            outputStream.write(bytes);
 //            used for explain how to read 4 bytes from RawClientServer and print it
+            Scanner scanner = new Scanner(System.in);
 
-            String message = "Привет, мир!";
+            while (!clientSocket.isClosed()) {
+
+            System.out.println("Введите сообщение: ");
+            String message = scanner.nextLine();
+            if ("exit".equalsIgnoreCase(message.trim())) {
+                System.out.println("Завершение работы...");
+                break;
+            }
+
             byte[] messageAsByteArray = message.getBytes(StandardCharsets.UTF_8);
             int bytesInArray = messageAsByteArray.length;
 
@@ -30,7 +40,7 @@ public class RewTcpClient {
 
             outputStream.write(encodedBytesInArray);
             outputStream.write(messageAsByteArray);
-
+            }
         }
     }
 }

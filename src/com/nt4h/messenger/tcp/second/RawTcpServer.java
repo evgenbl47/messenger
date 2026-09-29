@@ -13,29 +13,32 @@ public class RawTcpServer {
     public static final int PORT = 27015;
 
 //add repeating
-    public static void main(String[] args) throws IOException {
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            Socket clientSocket = serverSocket.accept();
+        public static void main(String[] args) throws IOException {
+            try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+                Socket clientSocket = serverSocket.accept();
 
-            InputStream inputStream = clientSocket.getInputStream();
-            OutputStream outputStream = clientSocket.getOutputStream();
+                InputStream inputStream = clientSocket.getInputStream();
+                OutputStream outputStream = clientSocket.getOutputStream();
 
-            byte[] encodedBytesInArray = inputStream.readNBytes(4);
-            System.out.println(Arrays.toString(encodedBytesInArray));
+                while(!clientSocket.isClosed()){
 
-            int byteInArray =
-                    ((encodedBytesInArray[0] & 0xFF) << 24) |
-                    ((encodedBytesInArray[1] & 0xFF) << 16) |
-                    ((encodedBytesInArray[2] & 0xFF) << 8) |
-                    ((encodedBytesInArray[3] & 0xFF));
+                byte[] encodedBytesInArray = inputStream.readNBytes(4);
+                System.out.println(Arrays.toString(encodedBytesInArray));
 
-            System.out.println(byteInArray);
+                int byteInArray =
+                        ((encodedBytesInArray[0] & 0xFF) << 24) |
+                        ((encodedBytesInArray[1] & 0xFF) << 16) |
+                        ((encodedBytesInArray[2] & 0xFF) << 8) |
+                        ((encodedBytesInArray[3] & 0xFF));
 
-            byte[] messageAsByteArray = inputStream.readNBytes(byteInArray);
+                System.out.println(byteInArray);
 
-            String message = new String(messageAsByteArray, StandardCharsets.UTF_8);
-            System.out.println(message);
+                byte[] messageAsByteArray = inputStream.readNBytes(byteInArray);
+                String message = new String(messageAsByteArray, StandardCharsets.UTF_8);
+                System.out.println(message);
+                }
+
+            }
+
         }
-
-    }
 }

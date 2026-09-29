@@ -14,9 +14,6 @@ public class RewTcpClient {
         try (Socket clientSocket = new Socket(HOST, RawTcpServer.PORT)) {
             OutputStream outputStream = clientSocket.getOutputStream();
 
-//            byte[] bytes = {0,0,0,0}; //-128 ... 127 -> 256
-//            outputStream.write(bytes);
-//            used for explain how to read 4 bytes from RawClientServer and print it
             Scanner scanner = new Scanner(System.in);
 
             while (!clientSocket.isClosed()) {

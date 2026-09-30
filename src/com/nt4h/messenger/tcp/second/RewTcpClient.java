@@ -11,10 +11,11 @@ public class RewTcpClient {
     //add repeating
     public static void main(String[] args) throws IOException {
 
-        try (Socket clientSocket = new Socket(HOST, RawTcpServer.PORT)) {
+        try (Socket clientSocket = new Socket(HOST, RawTcpServer.PORT);
+             Scanner scanner = new Scanner(System.in)) {
             OutputStream outputStream = clientSocket.getOutputStream();
 
-            Scanner scanner = new Scanner(System.in);
+
 
             while (!clientSocket.isClosed()) {
 

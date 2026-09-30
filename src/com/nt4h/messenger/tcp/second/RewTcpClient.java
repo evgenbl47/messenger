@@ -18,7 +18,7 @@ public class RewTcpClient {
 
             while (!clientSocket.isClosed()) {
 
-            System.out.println("Введите сообщение: ");
+            System.out.print("Введите сообщение: ");
             String message = scanner.nextLine();
             if ("exit".equalsIgnoreCase(message.trim())) {
                 System.out.println("Завершение работы...");
